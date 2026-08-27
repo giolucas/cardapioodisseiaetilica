@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cardápio 6ª Ed Odisseia Etílica — Garimpa Drink</title>
+<meta name="description" content="Cardápio Garimpa Drink — Clássicos e Autorais. Clássicos revisitados e autorais de raiz brasileira.">
+<link rel="icon" href="assets/garimpa-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  :root {
+    /* Brand palette */
+    --garimpa-magenta: #ba1971;
+    --garimpa-magenta-600: #a01362;
+
+    /* Warm neutrals */
+    --paper: #faf6f0;
+    --paper-dim: #f2ebe1;
+    --card: #ffffff;
+    --ink: #1b1512;
+    --ink-soft: #3a322d;
+    --stone-500: #8a7d73;
+    --stone-400: #a89c91;
+    --stone-300: #cfc5ba;
+    --stone-200: #e6ddd2;
+    --night: #14100e;
+
+    /* Semantic aliases */
+    --surface-card: var(--card);
+    --text-strong: var(--ink);
+    --text-body: var(--ink-soft);
+    --text-muted: var(--stone-500);
+    --text-faint: var(--stone-400);
+    --text-on-night: #f3ece2;
+    --border-hairline: var(--stone-200);
+    --brand-primary: var(--garimpa-magenta);
+    --brand-primary-hover: var(--garimpa-magenta-600);
+    --accent-amber: #f2a623;
+    --accent-pink: #ed72a6;
+    --accent-rust: #a8431a;
+    --tint-magenta: #f7e6ef;
+
+    /* Typography */
+    --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --text-3xs: 0.6875rem;
+    --text-2xs: 0.75rem;
+    --text-xs: 0.8125rem;
+    --text-sm: 0.9375rem;
+    --text-md: 1.125rem;
+    --text-lg: 1.3125rem;
+    --text-xl: 1.625rem;
+    --text-2xl: 2.125rem;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --leading-tight: 1.02;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.65;
+    --tracking-display: -0.01em;
+    --tracking-label: 0.14em;
+
+    /* Effects */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 2px 6px rgba(27, 21, 18, 0.07), 0 1px 2px rgba(27, 21, 18, 0.05);
+    --shadow-lg: 0 18px 44px rgba(27, 21, 18, 0.13), 0 6px 14px rgba(27, 21, 18, 0.06);
+    --grain-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    --grain-opacity: 0.14;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper-dim);
+    font-family: var(--font-sans);
+    color: var(--text-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--brand-primary); text-decoration: none; }
+  a:hover { color: var(--brand-primary-hover); }
+
+  .has-grain { position: relative; isolation: isolate; }
+  .has-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain-url);
+    background-size: 160px 160px;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .page {
+    background: var(--paper-dim);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+  .menu {
+    width: 100%;
+    max-width: 480px;
+    background: var(--paper);
+    box-shadow: var(--shadow-lg);
+    padding-bottom: 56px;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--night);
+    padding: 34px 26px 30px;
+    text-align: center;
+  }
+  .hero-mark {
+    width: 74px;
+    height: 74px;
+    border-radius: var(--radius-md);
+    display: block;
+    margin: 0 auto 18px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    font-size: var(--text-3xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--accent-pink);
+    margin-bottom: 12px;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-2xl);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-on-night);
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent-pink);
+  }
+  .hero-subtitle {
+    margin-top: 12px;
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+    color: rgba(243, 236, 226, 0.66);
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(250, 246, 240, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-hairline);
+  }
+  .nav a {
+    flex: 0 0 auto;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    color: var(--brand-primary);
+    background: var(--tint-magenta);
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .nav a:hover {
+    background: var(--brand-primary);
+    color: #fff;
+  }
+
+  /* Sections */
+  .section { padding: 34px 20px 0; }
+  .section:first-of-type { padding-top: 32px; }
+  .section-kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--text-3xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--brand-primary);
+  }
+  .section-kicker .rule {
+    width: 26px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+  .section-title {
+    margin-top: 10px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-xl);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-strong);
+  }
+  .section-lede {
+    margin-top: 4px;
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+  .drink-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  /* Drink cards */
+  .drink-card {
+    background: var(--surface-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 15px 17px;
+  }
+  .drink-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-md);
+    color: var(--text-strong);
+  }
+  .drink-recipe {
+    margin-top: 5px;
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+    color: var(--text-muted);
+  }
+  .drink-flag {
+    margin-top: 9px;
+    font-size: var(--text-2xs);
+    color: var(--accent-rust);
+  }
+
+  /* Signature cards */
+  .drink-card--signature {
+    background: var(--night);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+  }
+  .signature-head {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .signature-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-lg);
+    color: var(--text-on-night);
+  }
+  .badge {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    font-family: var(--font-sans);
+    font-size: var(--text-3xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    border-radius: var(--radius-pill);
+    background: var(--accent-amber);
+    color: #fff;
+    white-space: nowrap;
+  }
+  .signature-recipe {
+    position: relative;
+    z-index: 2;
+    margin-top: 6px;
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+    color: rgba(243, 236, 226, 0.72);
+  }
+  .signature-note {
+    position: relative;
+    z-index: 2;
+    margin-top: 9px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--accent-pink);
+  }
+
+  /* Footer */
+  .footer {
+    margin: 40px 20px 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-hairline);
+    text-align: center;
+  }
+  .footer-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    opacity: 0.9;
+  }
+  .footer-legal {
+    margin-top: 12px;
+    font-size: var(--text-2xs);
+    line-height: var(--leading-relaxed);
+    color: var(--text-faint);
+  }
+  .footer-handle {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="menu">
+
+  <div class="hero has-grain">
+    <img class="hero-mark" src="assets/garimpa-mark.png" alt="Garimpa Drink">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Garimpa Drink</div>
+      <h1 class="hero-title">Cardápio 6ª Ed<br><em>Odisseia Etílica</em></h1>
+      <div class="hero-subtitle">Clássicos e Autorais</div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="#classicos">Clássicos</a>
+    <a href="#autorais">Autorais</a>
+    <a href="#refrescantes">Refrescantes</a>
+    <a href="#amaros">Amaros</a>
+    <a href="#brunch">Brunch</a>
+  </nav>
+
+  <section id="classicos" class="section">
+    <div class="section-kicker"><span class="rule"></span>01 · Clássicos</div>
+    <h2 class="section-title">Receitas de bar consagradas</h2>
+    <div class="section-lede">Do jeito certo, sem atalho.</div>
+
+    <div class="drink-list">
+      <div class="drink-card">
+        <div class="drink-name">Old Fashioned</div>
+        <div class="drink-recipe">Bourbon · xarope de açúcar · angostura tradicional · twist de limão siciliano</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Manhattan</div>
+        <div class="drink-recipe">Rye · vermute rosso · angostura tradicional · cereja fabbri</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Whiskey Sour</div>
+        <div class="drink-recipe">Bourbon · limão siciliano · xarope · clara de ovo · dash de angostura laranja</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Negroni</div>
+        <div class="drink-recipe">Gin · campari · vermute rosso</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Dry Martini</div>
+        <div class="drink-recipe">Gin · vermute branco · dash de angostura laranja</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Boulevardier</div>
+        <div class="drink-recipe">Bourbon · campari · vermute rosso</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="autorais" class="section">
+    <div class="section-kicker"><span class="rule"></span>02 · Autorais</div>
+    <h2 class="section-title">Assinatura da casa</h2>
+    <div class="section-lede">Com toque brasileiro.</div>
+
+    <div class="drink-list">
+      <div class="drink-card drink-card--signature has-grain">
+        <div class="signature-head">
+          <span class="signature-name">Formigueira</span>
+          <span class="badge">Assinatura</span>
+        </div>
+        <div class="signature-recipe">Cachaça de jambu · limão tahiti · gengibre · mel</div>
+        <div class="signature-note">O amortecimento do jambu com o ardor do gengibre.</div>
+      </div>
+
+      <div class="drink-card">
+        <div class="drink-name">Penicillin</div>
+        <div class="drink-recipe">Single malt · float de whiskey turfado · mel · gengibre · limão siciliano</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Gold Rush</div>
+        <div class="drink-recipe">Bourbon · mel · limão siciliano</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Honey-Ginger Smash</div>
+        <div class="drink-recipe">Bourbon (ou moonshine) · mel · gengibre · limão siciliano</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Caipirissima</div>
+        <div class="drink-recipe">Cachaça envelhecida · limão siciliano · mel</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Blood and Sand</div>
+        <div class="drink-recipe">Single malt · vermute rosso · cherry heering · suco de laranja</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Soju Ginger Fizz</div>
+        <div class="drink-recipe">Soju · gengibre · limão tahiti</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Paper Plane</div>
+        <div class="drink-recipe">Bourbon · aperol · amaro averna · limão siciliano</div>
+      </div>
+
+      <div class="drink-card drink-card--signature has-grain">
+        <div class="signature-head">
+          <span class="signature-name">Macunaíma</span>
+          <span class="badge">Assinatura</span>
+        </div>
+        <div class="signature-recipe">Cachaça de jambu · cachaça branca · mel · gengibre · limão siciliano</div>
+        <div class="signature-note">Herói sem nenhum caráter — dose dupla de cachaça, uma que anestesia e outra que refresca.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="refrescantes" class="section">
+    <div class="section-kicker"><span class="rule"></span>03 · Refrescantes</div>
+    <h2 class="section-title">Leves e cítricos</h2>
+    <div class="section-lede">Para o calor.</div>
+
+    <div class="drink-list">
+      <div class="drink-card">
+        <div class="drink-name">Caipirinha</div>
+        <div class="drink-recipe">Cachaça branca · limão tahiti · xarope de açúcar</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Cachamarita</div>
+        <div class="drink-recipe">Cachaça branca · cointreau · limão tahiti</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">St Germain Fizz</div>
+        <div class="drink-recipe">Gin · st germain · limão tahiti · água com gás</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Bee's Knees</div>
+        <div class="drink-recipe">Gin · mel · limão siciliano</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Basil Smash</div>
+        <div class="drink-recipe">Gin · limão siciliano · xarope de açúcar · manjericão fresco</div>
+        <div class="drink-flag">Manjericão fora da lista original — item extra a providenciar.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="amaros" class="section">
+    <div class="section-kicker"><span class="rule"></span>04 · Amaros</div>
+    <h2 class="section-title">Amargor elegante</h2>
+    <div class="section-lede">Ótimos como aperitivo.</div>
+
+    <div class="drink-list">
+      <div class="drink-card">
+        <div class="drink-name">Garibaldi</div>
+        <div class="drink-recipe">Campari · suco de laranja batido</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Cynar Negroni</div>
+        <div class="drink-recipe">Cynar · gin · vermute rosso</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Averna Sour</div>
+        <div class="drink-recipe">Amaro averna · limão siciliano · xarope · clara de ovo</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="brunch" class="section">
+    <div class="section-kicker"><span class="rule"></span>05 · Brunch</div>
+    <h2 class="section-title">Estilo brunch</h2>
+    <div class="section-lede">Para acompanhar ou pedir diferente.</div>
+
+    <div class="drink-list">
+      <div class="drink-card">
+        <div class="drink-name">Bloody Mary</div>
+        <div class="drink-recipe">Vodka · suco de tomate · molho inglês · limão tahiti</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Vodka Ginger Sour</div>
+        <div class="drink-recipe">Vodka · gengibre · limão siciliano · mel</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <img class="footer-mark" src="assets/garimpa-mark.png" alt="Garimpa Drink">
+    <div class="footer-legal">Coquetéis com clara de ovo contêm alérgenos.<br>+18 · Beba com responsabilidade.</div>
+    <a class="footer-handle" href="https://instagram.com/garimpa.drink">@garimpa.drink</a>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
