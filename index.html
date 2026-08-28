@@ -328,12 +328,12 @@
   /* Ficha técnica (accordion inline, aberto por duplo toque no card) */
   .ficha-panel {
     margin-top: 14px;
-    background: #1c1712;
-    border: 1px solid #2e2820;
+    background: var(--paper-dim);
+    border: 1px solid var(--border-hairline);
     border-radius: var(--radius-md);
     padding: 16px 17px;
     font-family: 'Karla', var(--font-sans);
-    color: #ece4d8;
+    color: var(--text-body);
   }
   .meta-row {
     display: flex;
@@ -345,21 +345,21 @@
     font-size: var(--text-2xs);
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: #14110f;
-    background: #c9a15a;
+    color: #fff;
+    background: var(--brand-primary);
     padding: 4px 10px;
     border-radius: 10px;
   }
   .meta.alt {
     background: transparent;
-    color: #a89d8c;
-    border: 1px solid #45392a;
+    color: var(--text-muted);
+    border: 1px solid var(--border-hairline);
   }
   .block-label {
     font-size: var(--text-2xs);
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #7c8f7a;
+    color: var(--brand-primary);
     margin: 14px 0 7px;
   }
   .block-label:first-of-type { margin-top: 0; }
@@ -369,35 +369,35 @@
     justify-content: space-between;
     gap: 10px;
     font-size: var(--text-sm);
-    color: #d4c9b8;
+    color: var(--text-body);
     padding: 6px 0;
-    border-bottom: 1px dashed #2a251e;
+    border-bottom: 1px dashed var(--border-hairline);
   }
   .ing-list li:last-child { border-bottom: none; }
   .ing-qty {
     font-family: 'JetBrains Mono', monospace;
     font-size: var(--text-sm);
-    color: #c9a15a;
+    color: var(--brand-primary);
     white-space: nowrap;
   }
   .steps {
     font-size: var(--text-sm);
-    color: #a89d8c;
+    color: var(--text-muted);
     line-height: 1.7;
     padding-left: 18px;
   }
   .steps li { margin-bottom: 4px; }
   .garnish {
     font-size: var(--text-sm);
-    color: #d4c9b8;
+    color: var(--text-body);
     font-style: italic;
   }
   .note {
     margin-top: 12px;
     font-size: var(--text-xs);
-    color: #8d8477;
-    background: #221d18;
-    border-left: 2px solid #45392a;
+    color: var(--text-muted);
+    background: var(--tint-magenta);
+    border-left: 2px solid var(--brand-primary);
     padding: 8px 12px;
     border-radius: 0 6px 6px 0;
   }
