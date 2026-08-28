@@ -534,6 +534,7 @@
     color: var(--text-on-night);
     margin-bottom: 18px;
   }
+  .gate-field { position: relative; }
   .gate-input {
     width: 100%;
     font-family: var(--font-sans);
@@ -542,11 +543,28 @@
     background: rgba(243, 236, 226, 0.08);
     border: 1px solid rgba(243, 236, 226, 0.2);
     border-radius: var(--radius-md);
-    padding: 12px 14px;
+    padding: 12px 44px 12px 14px;
     text-align: center;
     outline: none;
   }
   .gate-input:focus { border-color: var(--brand-primary); }
+  .gate-toggle {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: rgba(243, 236, 226, 0.55);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gate-toggle:hover { color: var(--text-on-night); }
+  .gate-toggle svg { width: 19px; height: 19px; }
   .gate-submit {
     width: 100%;
     margin-top: 10px;
@@ -580,7 +598,10 @@
     <img class="gate-mark" src="assets/garimpa-mark-round.png" alt="Garimpa Drink">
     <div class="gate-eyebrow">Garimpa Drink</div>
     <div class="gate-title">Cardápio reservado</div>
-    <input id="gate-input" class="gate-input" type="password" placeholder="Senha de acesso" autocomplete="off" autofocus>
+    <div class="gate-field">
+      <input id="gate-input" class="gate-input" type="password" placeholder="Senha de acesso" autocomplete="off" autofocus>
+      <button type="button" id="gate-toggle" class="gate-toggle" aria-label="Mostrar senha"></button>
+    </div>
     <button type="submit" class="gate-submit">Entrar</button>
     <div id="gate-error" class="gate-error"></div>
   </form>
@@ -810,6 +831,17 @@
   var form = document.getElementById("gate-form");
   var input = document.getElementById("gate-input");
   var error = document.getElementById("gate-error");
+  var toggle = document.getElementById("gate-toggle");
+
+  var EYE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+  var EYE_OFF_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a18.5 18.5 0 0 1 5.06-5.94"></path><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19"></path><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+  toggle.innerHTML = EYE_ICON;
+  toggle.addEventListener("click", function () {
+    var showing = input.type === "text";
+    input.type = showing ? "password" : "text";
+    toggle.innerHTML = showing ? EYE_ICON : EYE_OFF_ICON;
+    toggle.setAttribute("aria-label", showing ? "Mostrar senha" : "Ocultar senha");
+  });
 
   function unlock() {
     gate.classList.add("is-hidden");
