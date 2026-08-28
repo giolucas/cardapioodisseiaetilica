@@ -325,9 +325,56 @@
     color: var(--text-muted);
   }
 
+  /* Signature cards */
+  .drink-card--signature {
+    background: var(--night);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+  }
+  .signature-head {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .signature-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-xl);
+    color: var(--text-on-night);
+  }
+  .badge {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    font-family: var(--font-sans);
+    font-size: var(--text-3xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    border-radius: var(--radius-pill);
+    background: var(--accent-amber);
+    color: #fff;
+    white-space: nowrap;
+  }
+  .signature-recipe {
+    position: relative;
+    z-index: 2;
+    margin-top: 6px;
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: rgba(243, 236, 226, 0.72);
+  }
+
   /* Ficha técnica (accordion inline, aberto por duplo toque no card) */
   .ficha-panel {
     position: relative;
+    z-index: 2;
     margin-top: 14px;
     background: var(--paper-dim);
     border: 1px solid var(--border-hairline);
@@ -697,9 +744,12 @@
         <div class="drink-name">Caipirinha</div>
         <div class="drink-recipe">Cachaça branca · limão tahiti · xarope de açúcar</div>
       </div>
-      <div class="drink-card" data-drink="Macunaíma">
-        <div class="drink-name">Macunaíma</div>
-        <div class="drink-recipe">Cachaça · limão tahiti · xarope de açúcar · fernet branca</div>
+      <div class="drink-card drink-card--signature has-grain" data-drink="Macunaíma">
+        <div class="signature-head">
+          <span class="signature-name">Macunaíma</span>
+          <span class="badge">Assinatura</span>
+        </div>
+        <div class="signature-recipe">Cachaça branca · xarope de açúcar · suco de limão · Fernet-Branca</div>
       </div>
       <div class="drink-card" data-drink="Rabo de Galo">
         <div class="drink-name">Rabo de Galo</div>
