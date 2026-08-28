@@ -196,41 +196,23 @@
     color: #fff;
   }
 
-  /* Accordion */
+  /* Section block (Programação / Cardápio) */
   .accordion {
     border-bottom: 1px solid var(--border-hairline);
   }
   .accordion-summary {
-    list-style: none;
-    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 18px 20px;
+    padding: 18px 20px 6px;
     font-family: var(--font-display);
     font-size: var(--text-xl);
     color: var(--text-strong);
   }
-  .accordion-summary::-webkit-details-marker { display: none; }
-  .accordion-summary::marker { content: ""; }
-  .accordion-icon {
-    flex: 0 0 auto;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--tint-magenta);
-    color: var(--brand-primary);
-    font-family: var(--font-sans);
-    font-weight: var(--weight-bold);
+  .accordion-lede {
+    padding: 0 20px 12px;
     font-size: var(--text-sm);
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: var(--text-muted);
   }
-  .accordion-icon::before { content: "+"; }
-  details[open] > .accordion-summary .accordion-icon::before { content: "\2013"; }
   .accordion-body { padding-bottom: 8px; }
 
   /* Schedule (Programação) */
@@ -238,7 +220,7 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding: 0 20px 22px;
+    padding: 4px 20px 22px;
   }
   .schedule-row {
     display: flex;
@@ -458,16 +440,14 @@
     </div>
   </header>
 
-  <details class="accordion" open>
-    <summary class="accordion-summary">
-      <span>Programação</span>
-      <span class="accordion-icon" aria-hidden="true"></span>
-    </summary>
+  <div class="accordion">
+    <div class="accordion-summary">Programação</div>
+    <div class="accordion-lede">Drinks servidos em tamanhos menores para o menu guiado.</div>
     <div class="accordion-body">
       <div class="schedule-list">
         <div class="schedule-row">
           <span class="schedule-time">16h30</span>
-          <span class="schedule-text"><strong>Open Drink</strong> — Penicilin (1 litro).</span>
+          <span class="schedule-text"><strong>Open Drink</strong> — Penicilin.</span>
         </div>
         <div class="schedule-row">
           <span class="schedule-time">17h30</span>
@@ -483,13 +463,10 @@
         </div>
       </div>
     </div>
-  </details>
+  </div>
 
-  <details class="accordion" id="cardapio-accordion">
-    <summary class="accordion-summary">
-      <span>Cardápio</span>
-      <span class="accordion-icon" aria-hidden="true"></span>
-    </summary>
+  <div class="accordion">
+    <div class="accordion-summary">Cardápio</div>
     <div class="accordion-body">
 
     <nav class="nav">
@@ -623,7 +600,7 @@
   </section>
 
     </div>
-  </details>
+  </div>
 
   <div class="footer">
     <img class="footer-mark" src="assets/garimpa-mark-round.png" alt="Garimpa Drink">
@@ -682,7 +659,6 @@
 (function () {
   var header = document.querySelector(".site-header");
   var nav = document.querySelector(".nav");
-  var cardapio = document.getElementById("cardapio-accordion");
   if (!header) return;
   function setSizes() {
     document.documentElement.style.setProperty("--header-h", header.offsetHeight + "px");
@@ -693,9 +669,6 @@
   setSizes();
   window.addEventListener("resize", setSizes);
   window.addEventListener("load", setSizes);
-  if (cardapio) {
-    cardapio.addEventListener("toggle", setSizes);
-  }
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(setSizes);
   }
