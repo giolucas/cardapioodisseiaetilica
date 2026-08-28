@@ -110,10 +110,17 @@
     padding-bottom: 56px;
   }
 
+  /* Sticky header (hero + nav freeze together on scroll) */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
   /* Hero */
   .hero {
     background: var(--night);
-    padding: 34px 26px 30px;
+    padding: 14px 22px 12px;
     text-align: center;
   }
   .hero-brand {
@@ -124,11 +131,11 @@
     justify-content: flex-start;
     gap: 9px;
     text-align: left;
-    margin-bottom: 22px;
+    margin-bottom: 8px;
   }
   .hero-brand-mark {
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     display: block;
     flex-shrink: 0;
@@ -144,7 +151,7 @@
   .hero-title {
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: var(--text-2xl);
+    font-size: var(--text-md);
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-display);
     color: var(--text-on-night);
@@ -154,13 +161,10 @@
     color: var(--accent-pink);
   }
   .hero-subtitle {
-    margin-top: 12px;
-    font-size: var(--text-xs);
+    margin-top: 4px;
+    font-size: var(--text-2xs);
     line-height: var(--leading-normal);
     color: rgba(243, 236, 226, 0.66);
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   /* Nav */
@@ -168,10 +172,7 @@
     display: flex;
     gap: 8px;
     overflow-x: auto;
-    padding: 14px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    padding: 12px 20px;
     background: rgba(250, 246, 240, 0.92);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-hairline);
@@ -432,24 +433,26 @@
 <div id="page" class="page is-hidden">
 <div class="menu">
 
-  <div class="hero has-grain">
-    <div class="hero-brand">
-      <img class="hero-brand-mark" src="assets/garimpa-mark-round.png" alt="Garimpa Drink">
-      <span class="hero-brand-name">Garimpa Drink</span>
+  <header class="site-header">
+    <div class="hero has-grain">
+      <div class="hero-brand">
+        <img class="hero-brand-mark" src="assets/garimpa-mark-round.png" alt="Garimpa Drink">
+        <span class="hero-brand-name">Garimpa Drink</span>
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">Cardápio 6ª Ed. <em>Odisseia Etílica</em></h1>
+        <div class="hero-subtitle">Clássicos e Autorais</div>
+      </div>
     </div>
-    <div class="hero-content">
-      <h1 class="hero-title">Cardápio 6ª Ed<br><em>Odisseia Etílica</em></h1>
-      <div class="hero-subtitle">Clássicos e Autorais</div>
-    </div>
-  </div>
 
-  <nav class="nav">
-    <a href="#classicos">Clássicos</a>
-    <a href="#autorais">Autorais</a>
-    <a href="#refrescantes">Refrescantes</a>
-    <a href="#amaros">Amaros</a>
-    <a href="#brunch">Brunch</a>
-  </nav>
+    <nav class="nav">
+      <a href="#classicos">Clássicos</a>
+      <a href="#autorais">Autorais</a>
+      <a href="#refrescantes">Refrescantes</a>
+      <a href="#amaros">Amaros</a>
+      <a href="#brunch">Brunch</a>
+    </nav>
+  </header>
 
   <section id="classicos" class="section">
     <div class="section-kicker"><span class="rule"></span>01 · Clássicos</div>
