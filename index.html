@@ -327,6 +327,7 @@
 
   /* Ficha técnica (accordion inline, aberto por duplo toque no card) */
   .ficha-panel {
+    position: relative;
     margin-top: 14px;
     background: var(--paper-dim);
     border: 1px solid var(--border-hairline);
@@ -335,11 +336,31 @@
     font-family: 'Karla', var(--font-sans);
     color: var(--text-body);
   }
+  .ficha-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--tint-magenta);
+    color: var(--brand-primary);
+    border: none;
+    font-size: var(--text-md);
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .meta-row {
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
     margin-bottom: 14px;
+    padding-right: 34px;
   }
   .meta {
     font-size: var(--text-2xs);
@@ -972,6 +993,13 @@
     var panel = document.createElement("div");
     panel.className = "ficha-panel";
 
+    var closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "ficha-close-btn";
+    closeBtn.setAttribute("aria-label", "Fechar ficha técnica");
+    closeBtn.textContent = "−";
+    panel.appendChild(closeBtn);
+
     if (!f) {
       var missing = document.createElement("div");
       missing.className = "note";
@@ -1050,8 +1078,13 @@
       existing.remove();
       card.classList.remove("is-open");
     } else {
-      card.appendChild(buildPanel(card.getAttribute("data-drink")));
+      var panel = buildPanel(card.getAttribute("data-drink"));
+      card.appendChild(panel);
       card.classList.add("is-open");
+      panel.querySelector(".ficha-close-btn").addEventListener("click", function (e) {
+        e.stopPropagation();
+        toggleFicha(card);
+      });
     }
   }
 
