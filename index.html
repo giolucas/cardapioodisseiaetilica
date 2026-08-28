@@ -320,68 +320,29 @@
     color: var(--text-muted);
   }
 
-  /* Ficha técnica (modal aberto por duplo toque no card) */
-  .ficha-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    background: rgba(20, 16, 14, 0.6);
-  }
-  .ficha-overlay.is-hidden { display: none; }
-  .ficha-modal {
-    position: relative;
-    width: 100%;
-    max-width: 480px;
-    max-height: 85vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+  /* Ficha técnica (accordion inline, aberto por duplo toque no card) */
+  .ficha-panel {
+    margin-top: 14px;
     background: #1c1712;
     border: 1px solid #2e2820;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    padding: 22px 20px 28px;
+    border-radius: var(--radius-md);
+    padding: 16px 17px;
     font-family: 'Karla', var(--font-sans);
     color: #ece4d8;
-  }
-  .ficha-close {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #221d18;
-    border: 1px solid #45392a;
-    color: #d8c9a3;
-    font-size: 17px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .ficha-modal .ficha-name {
-    font-family: 'Playfair Display', var(--font-display);
-    font-size: var(--text-lg);
-    color: #f3ead9;
-    margin: 0 34px 12px 0;
   }
   .meta-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 7px;
     margin-bottom: 14px;
   }
   .meta {
-    font-size: 10.5px;
+    font-size: var(--text-2xs);
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: #14110f;
     background: #c9a15a;
-    padding: 3px 9px;
+    padding: 4px 10px;
     border-radius: 10px;
   }
   .meta.alt {
@@ -390,11 +351,11 @@
     border: 1px solid #45392a;
   }
   .block-label {
-    font-size: 10.5px;
+    font-size: var(--text-2xs);
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: #7c8f7a;
-    margin: 12px 0 6px;
+    margin: 14px 0 7px;
   }
   .block-label:first-of-type { margin-top: 0; }
   .ing-list { list-style: none; }
@@ -402,41 +363,39 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    font-size: 13px;
+    font-size: var(--text-sm);
     color: #d4c9b8;
-    padding: 4px 0;
+    padding: 6px 0;
     border-bottom: 1px dashed #2a251e;
   }
   .ing-list li:last-child { border-bottom: none; }
   .ing-qty {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
+    font-size: var(--text-sm);
     color: #c9a15a;
     white-space: nowrap;
   }
   .steps {
-    font-size: 13px;
+    font-size: var(--text-sm);
     color: #a89d8c;
     line-height: 1.7;
     padding-left: 18px;
   }
-  .steps li { margin-bottom: 3px; }
+  .steps li { margin-bottom: 4px; }
   .garnish {
-    font-size: 13px;
+    font-size: var(--text-sm);
     color: #d4c9b8;
     font-style: italic;
   }
   .note {
-    margin-top: 10px;
-    font-size: 11.5px;
+    margin-top: 12px;
+    font-size: var(--text-xs);
     color: #8d8477;
     background: #221d18;
     border-left: 2px solid #45392a;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border-radius: 0 6px 6px 0;
   }
-  .note.is-hidden { display: none; }
-  html.ficha-open, html.ficha-open body { overflow: hidden; }
 
   /* Footer */
   .footer {
@@ -762,21 +721,6 @@
 </div>
 </div>
 
-<div id="ficha-overlay" class="ficha-overlay is-hidden" aria-hidden="true">
-  <div class="ficha-modal" role="dialog" aria-modal="true">
-    <button type="button" id="ficha-close" class="ficha-close" aria-label="Fechar">×</button>
-    <div id="ficha-name" class="ficha-name"></div>
-    <div id="ficha-meta" class="meta-row"></div>
-    <div class="block-label">Ingredientes</div>
-    <ul id="ficha-ings" class="ing-list"></ul>
-    <div id="ficha-steps-label" class="block-label">Preparo</div>
-    <ol id="ficha-steps" class="steps"></ol>
-    <div id="ficha-garnish-label" class="block-label">Guarnição</div>
-    <div id="ficha-garnish" class="garnish"></div>
-    <div id="ficha-note" class="note is-hidden"></div>
-  </div>
-</div>
-
 <script>
 (function () {
   var PASSWORD_HASH = "c50b2b02a10bbc889dcb15814a96d66ff53d18da10b00f5396ee16bb9ca03898";
@@ -845,7 +789,7 @@
 (function () {
   var FICHAS = {
     "Old Fashioned": {
-      meta: ["Construído", "Copo baixo", "Gelo em pedra única"],
+      meta: ["Mexido", "Copo baixo", "Gelo em pedra única"],
       ing: [["Bourbon", "60 ml"], ["Xarope de açúcar", "7 ml"], ["Angostura tradicional", "3 dashes"]],
       steps: [
         "No copo, misture o xarope com a angostura.",
@@ -877,7 +821,7 @@
       garnish: "Dash de angostura bitter desenhado na espuma"
     },
     "Negroni": {
-      meta: ["Construído", "Copo baixo", "Mexido"],
+      meta: ["Mexido", "Copo baixo"],
       ing: [["Gin", "30 ml"], ["Campari", "30 ml"], ["Vermute rosso", "30 ml"]],
       steps: ["Construa direto no copo com gelo.", "Mexa por 15–20s."],
       garnish: "Twist de laranja bahia"
@@ -892,7 +836,7 @@
       garnish: "Twist de limão siciliano"
     },
     "Boulevardier": {
-      meta: ["Construído", "Copo baixo", "Mexido"],
+      meta: ["Mexido", "Copo baixo"],
       ing: [["Bourbon", "40 ml"], ["Campari", "30 ml"], ["Vermute rosso", "30 ml"]],
       steps: ["Construa no copo com gelo.", "Mexa por 15–20s."],
       garnish: "Twist de laranja bahia"
@@ -937,7 +881,7 @@
       garnish: "Folha de manjericão"
     },
     "Bloody Mary": {
-      meta: ["Construído", "Copo alto"],
+      meta: ["Mexido", "Copo alto"],
       ing: [["Vodka", "45 ml"], ["Suco de tomate", "90 ml"], ["Molho inglês", "2 dashes"], ["Limão tahiti", "10 ml"], ["Sal e pimenta", "a gosto"]],
       steps: [
         "Construa todos os ingredientes no copo com gelo.",
@@ -1017,94 +961,103 @@
     }
   };
 
-  var overlay = document.getElementById("ficha-overlay");
-  var nameEl = document.getElementById("ficha-name");
-  var metaEl = document.getElementById("ficha-meta");
-  var ingEl = document.getElementById("ficha-ings");
-  var stepsEl = document.getElementById("ficha-steps");
-  var stepsLabelEl = document.getElementById("ficha-steps-label");
-  var garnishEl = document.getElementById("ficha-garnish");
-  var garnishLabelEl = document.getElementById("ficha-garnish-label");
-  var noteEl = document.getElementById("ficha-note");
-  var closeBtn = document.getElementById("ficha-close");
-
-  function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
-
-  function openFicha(name) {
+  function buildPanel(name) {
     var f = FICHAS[name];
-    nameEl.textContent = name;
-    clear(metaEl);
-    clear(ingEl);
-    clear(stepsEl);
+    var panel = document.createElement("div");
+    panel.className = "ficha-panel";
 
     if (!f) {
-      stepsLabelEl.classList.add("is-hidden");
-      garnishLabelEl.classList.add("is-hidden");
-      garnishEl.textContent = "";
-      noteEl.textContent = "Ficha técnica ainda não cadastrada para este drink.";
-      noteEl.classList.remove("is-hidden");
-    } else {
-      stepsLabelEl.classList.remove("is-hidden");
-      garnishLabelEl.classList.remove("is-hidden");
-      f.meta.forEach(function (m, i) {
-        var span = document.createElement("span");
-        span.className = i === 0 ? "meta" : "meta alt";
-        span.textContent = m;
-        metaEl.appendChild(span);
-      });
-      f.ing.forEach(function (pair) {
-        var li = document.createElement("li");
-        var nameSpan = document.createElement("span");
-        nameSpan.textContent = pair[0];
-        var qtySpan = document.createElement("span");
-        qtySpan.className = "ing-qty";
-        qtySpan.textContent = pair[1];
-        li.appendChild(nameSpan);
-        li.appendChild(qtySpan);
-        ingEl.appendChild(li);
-      });
-      f.steps.forEach(function (s) {
-        var li = document.createElement("li");
-        li.textContent = s;
-        stepsEl.appendChild(li);
-      });
-      garnishEl.textContent = f.garnish || "";
-      if (f.note) {
-        noteEl.textContent = f.note;
-        noteEl.classList.remove("is-hidden");
-      } else {
-        noteEl.textContent = "";
-        noteEl.classList.add("is-hidden");
-      }
+      var missing = document.createElement("div");
+      missing.className = "note";
+      missing.textContent = "Ficha técnica ainda não cadastrada para este drink.";
+      panel.appendChild(missing);
+      return panel;
     }
 
-    overlay.classList.remove("is-hidden");
-    overlay.setAttribute("aria-hidden", "false");
-    document.documentElement.classList.add("ficha-open");
+    var metaRow = document.createElement("div");
+    metaRow.className = "meta-row";
+    f.meta.forEach(function (m, i) {
+      var span = document.createElement("span");
+      span.className = i === 0 ? "meta" : "meta alt";
+      span.textContent = m;
+      metaRow.appendChild(span);
+    });
+    panel.appendChild(metaRow);
+
+    var ingLabel = document.createElement("div");
+    ingLabel.className = "block-label";
+    ingLabel.textContent = "Ingredientes";
+    panel.appendChild(ingLabel);
+
+    var ingList = document.createElement("ul");
+    ingList.className = "ing-list";
+    f.ing.forEach(function (pair) {
+      var li = document.createElement("li");
+      var nameSpan = document.createElement("span");
+      nameSpan.textContent = pair[0];
+      var qtySpan = document.createElement("span");
+      qtySpan.className = "ing-qty";
+      qtySpan.textContent = pair[1];
+      li.appendChild(nameSpan);
+      li.appendChild(qtySpan);
+      ingList.appendChild(li);
+    });
+    panel.appendChild(ingList);
+
+    var stepsLabel = document.createElement("div");
+    stepsLabel.className = "block-label";
+    stepsLabel.textContent = "Preparo";
+    panel.appendChild(stepsLabel);
+
+    var stepsList = document.createElement("ol");
+    stepsList.className = "steps";
+    f.steps.forEach(function (s) {
+      var li = document.createElement("li");
+      li.textContent = s;
+      stepsList.appendChild(li);
+    });
+    panel.appendChild(stepsList);
+
+    var garnishLabel = document.createElement("div");
+    garnishLabel.className = "block-label";
+    garnishLabel.textContent = "Guarnição";
+    panel.appendChild(garnishLabel);
+
+    var garnish = document.createElement("div");
+    garnish.className = "garnish";
+    garnish.textContent = f.garnish || "";
+    panel.appendChild(garnish);
+
+    if (f.note) {
+      var note = document.createElement("div");
+      note.className = "note";
+      note.textContent = f.note;
+      panel.appendChild(note);
+    }
+
+    return panel;
   }
 
-  function closeFicha() {
-    overlay.classList.add("is-hidden");
-    overlay.setAttribute("aria-hidden", "true");
-    document.documentElement.classList.remove("ficha-open");
+  function toggleFicha(card) {
+    var existing = card.querySelector(".ficha-panel");
+    if (existing) {
+      existing.remove();
+      card.classList.remove("is-open");
+    } else {
+      card.appendChild(buildPanel(card.getAttribute("data-drink")));
+      card.classList.add("is-open");
+    }
   }
-
-  closeBtn.addEventListener("click", closeFicha);
-  overlay.addEventListener("click", function (e) {
-    if (e.target === overlay) closeFicha();
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeFicha();
-  });
 
   var DOUBLE_TAP_MS = 350;
   document.querySelectorAll(".drink-card[data-drink]").forEach(function (card) {
-    card.addEventListener("click", function () {
+    card.addEventListener("click", function (e) {
+      if (e.target.closest(".ficha-panel")) return;
       var now = Date.now();
       var prev = Number(card.dataset.lastTap || 0);
       if (now - prev < DOUBLE_TAP_MS) {
         card.dataset.lastTap = 0;
-        openFicha(card.getAttribute("data-drink"));
+        toggleFicha(card);
       } else {
         card.dataset.lastTap = String(now);
       }
