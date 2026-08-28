@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Karla:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
   :root {
     /* Brand palette */
@@ -303,6 +304,8 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     padding: 15px 17px;
+    touch-action: manipulation;
+    cursor: pointer;
   }
   .drink-name {
     font-family: var(--font-display);
@@ -316,6 +319,124 @@
     line-height: var(--leading-normal);
     color: var(--text-muted);
   }
+
+  /* Ficha técnica (modal aberto por duplo toque no card) */
+  .ficha-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: rgba(20, 16, 14, 0.6);
+  }
+  .ficha-overlay.is-hidden { display: none; }
+  .ficha-modal {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #1c1712;
+    border: 1px solid #2e2820;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 22px 20px 28px;
+    font-family: 'Karla', var(--font-sans);
+    color: #ece4d8;
+  }
+  .ficha-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #221d18;
+    border: 1px solid #45392a;
+    color: #d8c9a3;
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ficha-modal .ficha-name {
+    font-family: 'Playfair Display', var(--font-display);
+    font-size: var(--text-lg);
+    color: #f3ead9;
+    margin: 0 34px 12px 0;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .meta {
+    font-size: 10.5px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #14110f;
+    background: #c9a15a;
+    padding: 3px 9px;
+    border-radius: 10px;
+  }
+  .meta.alt {
+    background: transparent;
+    color: #a89d8c;
+    border: 1px solid #45392a;
+  }
+  .block-label {
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #7c8f7a;
+    margin: 12px 0 6px;
+  }
+  .block-label:first-of-type { margin-top: 0; }
+  .ing-list { list-style: none; }
+  .ing-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    color: #d4c9b8;
+    padding: 4px 0;
+    border-bottom: 1px dashed #2a251e;
+  }
+  .ing-list li:last-child { border-bottom: none; }
+  .ing-qty {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: #c9a15a;
+    white-space: nowrap;
+  }
+  .steps {
+    font-size: 13px;
+    color: #a89d8c;
+    line-height: 1.7;
+    padding-left: 18px;
+  }
+  .steps li { margin-bottom: 3px; }
+  .garnish {
+    font-size: 13px;
+    color: #d4c9b8;
+    font-style: italic;
+  }
+  .note {
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: #8d8477;
+    background: #221d18;
+    border-left: 2px solid #45392a;
+    padding: 6px 10px;
+    border-radius: 0 6px 6px 0;
+  }
+  .note.is-hidden { display: none; }
+  html.ficha-open, html.ficha-open body { overflow: hidden; }
 
   /* Footer */
   .footer {
@@ -506,27 +627,27 @@
     <h2 class="section-title">Receitas de bar consagradas</h2>
 
     <div class="drink-list">
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Old Fashioned">
         <div class="drink-name">Old Fashioned</div>
         <div class="drink-recipe">Bourbon · xarope de açúcar · angostura tradicional · twist de limão siciliano</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Manhattan">
         <div class="drink-name">Manhattan</div>
         <div class="drink-recipe">Rye · vermute rosso · angostura tradicional · cereja fabbri</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Whiskey Sour">
         <div class="drink-name">Whiskey Sour</div>
         <div class="drink-recipe">Bourbon · limão siciliano · xarope · clara de ovo · dash de angostura bitter</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Negroni">
         <div class="drink-name">Negroni</div>
         <div class="drink-recipe">Gin · campari · vermute rosso</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Dry Martini">
         <div class="drink-name">Dry Martini</div>
         <div class="drink-recipe">Gin · vermute branco · dash de angostura laranja</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Boulevardier">
         <div class="drink-name">Boulevardier</div>
         <div class="drink-recipe">Bourbon · campari · vermute rosso</div>
       </div>
@@ -538,43 +659,43 @@
     <h2 class="section-title">Contemporâneos que viraram novos clássicos.</h2>
 
     <div class="drink-list">
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Penicillin">
         <div class="drink-name">Penicillin</div>
         <div class="drink-recipe">Single malt · float de whiskey turfado · mel · gengibre · limão siciliano</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Gold Rush">
         <div class="drink-name">Gold Rush</div>
         <div class="drink-recipe">Bourbon · mel · limão siciliano</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Blood and Sand">
         <div class="drink-name">Blood and Sand</div>
         <div class="drink-recipe">Single malt · vermute rosso · cherry heering · suco de laranja</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Paper Plane">
         <div class="drink-name">Paper Plane</div>
         <div class="drink-recipe">Bourbon · aperol · amaro averna · limão siciliano</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Basil Smash">
         <div class="drink-name">Basil Smash</div>
         <div class="drink-recipe">Gin · limão siciliano · xarope de açúcar · manjericão fresco</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Bloody Mary">
         <div class="drink-name">Bloody Mary</div>
         <div class="drink-recipe">Vodka · suco de tomate · molho inglês · limão tahiti</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Garibaldi">
         <div class="drink-name">Garibaldi</div>
         <div class="drink-recipe">Campari · suco de laranja batido</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="In Cold Blood">
         <div class="drink-name">In Cold Blood</div>
         <div class="drink-recipe">Rye · cynar · vermute</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="NY Sour">
         <div class="drink-name">NY Sour</div>
         <div class="drink-recipe">Bourbon · limão siciliano · xarope · clara de ovo · float de vinho tinto</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Margarita">
         <div class="drink-name">Margarita</div>
         <div class="drink-recipe">Tequila · cointreau · limão tahiti</div>
       </div>
@@ -586,15 +707,15 @@
     <h2 class="section-title">Carimba que é coisa nossa.</h2>
 
     <div class="drink-list">
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Caipirinha">
         <div class="drink-name">Caipirinha</div>
         <div class="drink-recipe">Cachaça branca · limão tahiti · xarope de açúcar</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Macunaíma">
         <div class="drink-name">Macunaíma</div>
         <div class="drink-recipe">Cachaça · limão tahiti · xarope de açúcar · fernet branca</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Rabo de Galo">
         <div class="drink-name">Rabo de Galo</div>
         <div class="drink-recipe">Cachaça · cynar · vermute</div>
       </div>
@@ -606,23 +727,23 @@
     <h2 class="section-title">Drinks com personalidade marcante.</h2>
 
     <div class="drink-list">
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Bamboo">
         <div class="drink-name">Bamboo</div>
         <div class="drink-recipe">Jerez · vermute branco · angostura laranja</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Adonis">
         <div class="drink-name">Adonis</div>
         <div class="drink-recipe">Jerez · vermute rosso · angostura laranja</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Casino Cocktail">
         <div class="drink-name">Casino Cocktail</div>
         <div class="drink-recipe">Gin · luxardo maraschino · limão siciliano · angostura laranja</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Martinez">
         <div class="drink-name">Martinez</div>
         <div class="drink-recipe">Gin · vermute rosso · luxardo maraschino · angostura tradicional</div>
       </div>
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Brooklyn (adaptado)">
         <div class="drink-name">Brooklyn (adaptado)</div>
         <div class="drink-recipe">Rye · vermute branco · luxardo maraschino · cherry heering</div>
       </div>
@@ -639,6 +760,21 @@
   </div>
 
 </div>
+</div>
+
+<div id="ficha-overlay" class="ficha-overlay is-hidden" aria-hidden="true">
+  <div class="ficha-modal" role="dialog" aria-modal="true">
+    <button type="button" id="ficha-close" class="ficha-close" aria-label="Fechar">×</button>
+    <div id="ficha-name" class="ficha-name"></div>
+    <div id="ficha-meta" class="meta-row"></div>
+    <div class="block-label">Ingredientes</div>
+    <ul id="ficha-ings" class="ing-list"></ul>
+    <div id="ficha-steps-label" class="block-label">Preparo</div>
+    <ol id="ficha-steps" class="steps"></ol>
+    <div id="ficha-garnish-label" class="block-label">Guarnição</div>
+    <div id="ficha-garnish" class="garnish"></div>
+    <div id="ficha-note" class="note is-hidden"></div>
+  </div>
 </div>
 
 <script>
@@ -702,6 +838,278 @@
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(setSizes);
   }
+})();
+</script>
+
+<script>
+(function () {
+  var FICHAS = {
+    "Old Fashioned": {
+      meta: ["Construído", "Copo baixo", "Gelo em pedra única"],
+      ing: [["Bourbon", "60 ml"], ["Xarope de açúcar", "7 ml"], ["Angostura tradicional", "3 dashes"]],
+      steps: [
+        "No copo, misture o xarope com a angostura.",
+        "Adicione um pouco de bourbon e mexa para incorporar.",
+        "Coloque o gelo em pedra e complete com o restante do bourbon.",
+        "Mexa por 20–30s até resfriar bem."
+      ],
+      garnish: "Twist de limão siciliano espremido sobre o drink"
+    },
+    "Manhattan": {
+      meta: ["Mexido", "Taça coupe", "Coado"],
+      ing: [["Rye", "60 ml"], ["Vermute rosso", "30 ml"], ["Angostura tradicional", "2 dashes"]],
+      steps: [
+        "Adicione todos os ingredientes no copo de mixing com gelo.",
+        "Mexa por 20–30s.",
+        "Coe em taça previamente gelada."
+      ],
+      garnish: "Cereja fabbri"
+    },
+    "Whiskey Sour": {
+      meta: ["Shake", "Copo baixo", "Dry shake"],
+      ing: [["Bourbon", "60 ml"], ["Limão siciliano", "25 ml"], ["Xarope de açúcar", "20 ml"], ["Clara de ovo", "15 ml"], ["Angostura bitter", "1 dash"]],
+      steps: [
+        "Dry shake (sem gelo) todos os ingredientes por 10–15s para emulsionar a clara.",
+        "Adicione gelo e faça o shake vigoroso por mais 15s.",
+        "Coe com coador fino direto no copo com gelo novo.",
+        "Finalize com o dash de angostura bitter sobre a espuma."
+      ],
+      garnish: "Dash de angostura bitter desenhado na espuma"
+    },
+    "Negroni": {
+      meta: ["Construído", "Copo baixo", "Mexido"],
+      ing: [["Gin", "30 ml"], ["Campari", "30 ml"], ["Vermute rosso", "30 ml"]],
+      steps: ["Construa direto no copo com gelo.", "Mexa por 15–20s."],
+      garnish: "Twist de laranja bahia"
+    },
+    "Dry Martini": {
+      meta: ["Mexido", "Taça martini", "Coado"],
+      ing: [["Gin", "60 ml"], ["Vermute branco", "10 ml"], ["Angostura laranja", "1 dash (opcional)"]],
+      steps: [
+        "Mexa todos os ingredientes no copo de mixing com bastante gelo por 25–30s.",
+        "Coe em taça martini bem gelada."
+      ],
+      garnish: "Twist de limão siciliano"
+    },
+    "Boulevardier": {
+      meta: ["Construído", "Copo baixo", "Mexido"],
+      ing: [["Bourbon", "40 ml"], ["Campari", "30 ml"], ["Vermute rosso", "30 ml"]],
+      steps: ["Construa no copo com gelo.", "Mexa por 15–20s."],
+      garnish: "Twist de laranja bahia"
+    },
+    "Penicillin": {
+      meta: ["Shake", "Copo baixo", "Float"],
+      ing: [["Single malt", "50 ml"], ["Xarope de mel e gengibre", "15 ml"], ["Limão siciliano", "20 ml"], ["Whiskey turfado (float)", "7 ml"]],
+      steps: [
+        "Shake o single malt, xarope e limão com gelo.",
+        "Coe em copo com gelo novo.",
+        "Finalize com o float de whiskey turfado por cima, despejando devagar sobre uma colher de bar."
+      ],
+      garnish: "Rodela de gengibre confitado"
+    },
+    "Gold Rush": {
+      meta: ["Shake", "Copo baixo"],
+      ing: [["Bourbon", "60 ml"], ["Limão siciliano", "22 ml"], ["Xarope de mel (1:1)", "20 ml"]],
+      steps: ["Shake com gelo por 12–15s.", "Coe em copo com gelo novo."],
+      garnish: "Sem guarnição, ou twist de limão siciliano"
+    },
+    "Blood and Sand": {
+      meta: ["Shake", "Taça coupe"],
+      ing: [["Single malt", "20 ml"], ["Vermute rosso", "20 ml"], ["Cherry heering", "20 ml"], ["Suco de laranja", "20 ml"]],
+      steps: ["Shake com gelo por 12–15s.", "Coe em taça gelada."],
+      garnish: "Twist de laranja"
+    },
+    "Paper Plane": {
+      meta: ["Shake", "Taça coupe", "Partes iguais"],
+      ing: [["Bourbon", "22 ml"], ["Aperol", "22 ml"], ["Amaro averna", "22 ml"], ["Limão siciliano", "22 ml"]],
+      steps: ["Shake com gelo por 12–15s.", "Coe em taça gelada."],
+      garnish: "Sem guarnição"
+    },
+    "Basil Smash": {
+      meta: ["Shake", "Muddled", "Copo baixo"],
+      ing: [["Gin", "60 ml"], ["Limão siciliano", "25 ml"], ["Xarope de açúcar", "15 ml"], ["Manjericão fresco", "8–10 folhas"]],
+      steps: [
+        "Macere o manjericão no fundo do shaker.",
+        "Adicione os demais ingredientes e gelo.",
+        "Shake vigoroso por 15s.",
+        "Double strain (coador fino) para copo com gelo."
+      ],
+      garnish: "Folha de manjericão"
+    },
+    "Bloody Mary": {
+      meta: ["Construído", "Copo alto"],
+      ing: [["Vodka", "45 ml"], ["Suco de tomate", "90 ml"], ["Molho inglês", "2 dashes"], ["Limão tahiti", "10 ml"], ["Sal e pimenta", "a gosto"]],
+      steps: [
+        "Construa todos os ingredientes no copo com gelo.",
+        "Mexa bem por 15–20s até integrar.",
+        "Ajuste sal e pimenta."
+      ],
+      garnish: "Talo de aipo ou rodela de limão tahiti"
+    },
+    "Margarita": {
+      meta: ["Shake", "Copo baixo", "Borda de sal opcional"],
+      ing: [["Tequila", "50 ml"], ["Cointreau", "20 ml"], ["Limão tahiti", "20 ml"]],
+      steps: [
+        "Se desejar, faça a borda de sal no copo antes de gelar.",
+        "Shake com gelo por 12–15s.",
+        "Coe em copo com gelo novo."
+      ],
+      garnish: "Rodela de limão tahiti"
+    },
+    "Caipirinha": {
+      meta: ["Muddled", "Copo baixo", "Gelo triturado"],
+      ing: [["Cachaça branca", "60 ml"], ["Limão tahiti (em cubos)", "1/2 unidade"], ["Xarope de açúcar", "15 ml"]],
+      steps: [
+        "Macere o limão com o xarope diretamente no copo.",
+        "Adicione a cachaça e o gelo triturado.",
+        "Mexa bem."
+      ],
+      garnish: "Sem guarnição"
+    },
+    "Macunaíma": {
+      meta: ["Shake", "Copo baixo"],
+      ing: [["Cachaça branca", "45 ml"], ["Xarope de açúcar", "25 ml"], ["Limão tahiti", "20 ml"], ["Fernet Branca", "7 ml"]],
+      steps: ["Shake todos os ingredientes com gelo por 15s.", "Coe em copo com gelo novo."],
+      garnish: "Rodela de limão tahiti"
+    },
+    "Bamboo": {
+      meta: ["Mexido", "Taça coupe", "Coado"],
+      ing: [["Jerez (fino ou amontillado)", "45 ml"], ["Vermute branco", "45 ml"], ["Angostura laranja", "2 dashes"]],
+      steps: [
+        "Mexa todos os ingredientes no copo de mixing com gelo por 20–30s.",
+        "Coe em taça gelada."
+      ],
+      garnish: "Twist de limão siciliano"
+    },
+    "Adonis": {
+      meta: ["Mexido", "Taça coupe", "Coado"],
+      ing: [["Jerez", "45 ml"], ["Vermute rosso", "45 ml"], ["Angostura laranja", "2 dashes"]],
+      steps: [
+        "Mexa todos os ingredientes no copo de mixing com gelo por 20–30s.",
+        "Coe em taça gelada."
+      ],
+      garnish: "Twist de laranja bahia"
+    },
+    "Casino Cocktail": {
+      meta: ["Shake", "Taça coupe"],
+      ing: [["Gin", "50 ml"], ["Luxardo maraschino", "10 ml"], ["Limão siciliano", "10 ml"], ["Angostura laranja", "2 dashes"]],
+      steps: ["Shake com gelo por 12–15s.", "Coe em taça gelada."],
+      garnish: "Cereja fabbri"
+    },
+    "Martinez": {
+      meta: ["Mexido", "Taça coupe", "Coado"],
+      ing: [["Gin", "45 ml"], ["Vermute rosso", "45 ml"], ["Luxardo maraschino", "7 ml"], ["Angostura tradicional", "2 dashes"]],
+      steps: [
+        "Mexa todos os ingredientes no copo de mixing com gelo por 20–30s.",
+        "Coe em taça gelada."
+      ],
+      garnish: "Twist de limão siciliano"
+    },
+    "Brooklyn (adaptado)": {
+      meta: ["Mexido", "Taça coupe", "Coado"],
+      ing: [["Rye", "60 ml"], ["Vermute branco", "20 ml"], ["Luxardo maraschino", "7 ml"], ["Cherry heering", "1 dash"]],
+      steps: [
+        "Mexa todos os ingredientes no copo de mixing com gelo por 20–30s.",
+        "Coe em taça gelada."
+      ],
+      garnish: "Sem guarnição",
+      note: "Receita original leva Amer Picon; aqui substituído por cherry heering por disponibilidade."
+    }
+  };
+
+  var overlay = document.getElementById("ficha-overlay");
+  var nameEl = document.getElementById("ficha-name");
+  var metaEl = document.getElementById("ficha-meta");
+  var ingEl = document.getElementById("ficha-ings");
+  var stepsEl = document.getElementById("ficha-steps");
+  var stepsLabelEl = document.getElementById("ficha-steps-label");
+  var garnishEl = document.getElementById("ficha-garnish");
+  var garnishLabelEl = document.getElementById("ficha-garnish-label");
+  var noteEl = document.getElementById("ficha-note");
+  var closeBtn = document.getElementById("ficha-close");
+
+  function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+
+  function openFicha(name) {
+    var f = FICHAS[name];
+    nameEl.textContent = name;
+    clear(metaEl);
+    clear(ingEl);
+    clear(stepsEl);
+
+    if (!f) {
+      stepsLabelEl.classList.add("is-hidden");
+      garnishLabelEl.classList.add("is-hidden");
+      garnishEl.textContent = "";
+      noteEl.textContent = "Ficha técnica ainda não cadastrada para este drink.";
+      noteEl.classList.remove("is-hidden");
+    } else {
+      stepsLabelEl.classList.remove("is-hidden");
+      garnishLabelEl.classList.remove("is-hidden");
+      f.meta.forEach(function (m, i) {
+        var span = document.createElement("span");
+        span.className = i === 0 ? "meta" : "meta alt";
+        span.textContent = m;
+        metaEl.appendChild(span);
+      });
+      f.ing.forEach(function (pair) {
+        var li = document.createElement("li");
+        var nameSpan = document.createElement("span");
+        nameSpan.textContent = pair[0];
+        var qtySpan = document.createElement("span");
+        qtySpan.className = "ing-qty";
+        qtySpan.textContent = pair[1];
+        li.appendChild(nameSpan);
+        li.appendChild(qtySpan);
+        ingEl.appendChild(li);
+      });
+      f.steps.forEach(function (s) {
+        var li = document.createElement("li");
+        li.textContent = s;
+        stepsEl.appendChild(li);
+      });
+      garnishEl.textContent = f.garnish || "";
+      if (f.note) {
+        noteEl.textContent = f.note;
+        noteEl.classList.remove("is-hidden");
+      } else {
+        noteEl.textContent = "";
+        noteEl.classList.add("is-hidden");
+      }
+    }
+
+    overlay.classList.remove("is-hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("ficha-open");
+  }
+
+  function closeFicha() {
+    overlay.classList.add("is-hidden");
+    overlay.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("ficha-open");
+  }
+
+  closeBtn.addEventListener("click", closeFicha);
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) closeFicha();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeFicha();
+  });
+
+  var DOUBLE_TAP_MS = 350;
+  document.querySelectorAll(".drink-card[data-drink]").forEach(function (card) {
+    card.addEventListener("click", function () {
+      var now = Date.now();
+      var prev = Number(card.dataset.lastTap || 0);
+      if (now - prev < DOUBLE_TAP_MS) {
+        card.dataset.lastTap = 0;
+        openFicha(card.getAttribute("data-drink"));
+      } else {
+        card.dataset.lastTap = String(now);
+      }
+    });
+  });
 })();
 </script>
 
