@@ -313,6 +313,17 @@
     touch-action: manipulation;
     cursor: pointer;
   }
+  .drink-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .glass-icon {
+    flex: 0 0 auto;
+    width: 19px;
+    height: 22px;
+    color: var(--text-muted);
+  }
   .drink-name {
     font-family: var(--font-display);
     font-weight: 400;
@@ -593,6 +604,27 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="glass-rocks" viewBox="0 0 24 28">
+      <path d="M6 6 L18 6 L16 23 Q16 25 14 25 L10 25 Q8 25 8 23 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="glass-coupe" viewBox="0 0 24 28">
+      <path d="M4 7 L20 7 Q19 17 12 17 Q5 17 4 7 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 17 L12 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M7 25 L17 25" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="glass-martini" viewBox="0 0 24 28">
+      <path d="M4 6 L20 6 L12 17 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 17 L12 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M7 25 L17 25" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="glass-highball" viewBox="0 0 24 28">
+      <path d="M8 5 L16 5 L15.3 24 Q15.2 25 14.2 25 L9.8 25 Q8.8 25 8.7 24 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
 <div id="gate" class="gate">
   <form id="gate-form" class="gate-card">
     <img class="gate-mark" src="assets/garimpa-mark-round.png" alt="Garimpa Drink">
@@ -680,27 +712,27 @@
 
     <div class="drink-list">
       <div class="drink-card" data-drink="Old Fashioned">
-        <div class="drink-name">Old Fashioned</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Old Fashioned</span></div>
         <div class="drink-recipe">Bourbon · xarope de açúcar · angostura tradicional · twist de limão siciliano</div>
       </div>
       <div class="drink-card" data-drink="Manhattan">
-        <div class="drink-name">Manhattan</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-coupe"></use></svg><span class="drink-name">Manhattan</span></div>
         <div class="drink-recipe">Rye · vermute rosso · angostura tradicional · cereja fabbri</div>
       </div>
       <div class="drink-card" data-drink="Whiskey Sour">
-        <div class="drink-name">Whiskey Sour</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Whiskey Sour</span></div>
         <div class="drink-recipe">Bourbon · limão siciliano · xarope · clara de ovo · dash de angostura bitter</div>
       </div>
       <div class="drink-card" data-drink="Negroni">
-        <div class="drink-name">Negroni</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Negroni</span></div>
         <div class="drink-recipe">Gin · campari · vermute rosso</div>
       </div>
       <div class="drink-card" data-drink="Dry Martini">
-        <div class="drink-name">Dry Martini</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-martini"></use></svg><span class="drink-name">Dry Martini</span></div>
         <div class="drink-recipe">Gin · vermute branco · dash de angostura laranja</div>
       </div>
       <div class="drink-card" data-drink="Boulevardier">
-        <div class="drink-name">Boulevardier</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Boulevardier</span></div>
         <div class="drink-recipe">Bourbon · campari · vermute rosso</div>
       </div>
     </div>
@@ -712,43 +744,43 @@
 
     <div class="drink-list">
       <div class="drink-card" data-drink="Penicillin">
-        <div class="drink-name">Penicillin</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Penicillin</span></div>
         <div class="drink-recipe">Single malt · float de whiskey turfado · mel · gengibre · limão siciliano</div>
       </div>
       <div class="drink-card" data-drink="Gold Rush">
-        <div class="drink-name">Gold Rush</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Gold Rush</span></div>
         <div class="drink-recipe">Bourbon · mel · limão siciliano</div>
       </div>
       <div class="drink-card" data-drink="Blood and Sand">
-        <div class="drink-name">Blood and Sand</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-coupe"></use></svg><span class="drink-name">Blood and Sand</span></div>
         <div class="drink-recipe">Single malt · vermute rosso · cherry heering · suco de laranja</div>
       </div>
       <div class="drink-card" data-drink="Paper Plane">
-        <div class="drink-name">Paper Plane</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-coupe"></use></svg><span class="drink-name">Paper Plane</span></div>
         <div class="drink-recipe">Bourbon · aperol · amaro averna · limão siciliano</div>
       </div>
       <div class="drink-card" data-drink="Basil Smash">
-        <div class="drink-name">Basil Smash</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Basil Smash</span></div>
         <div class="drink-recipe">Gin · limão siciliano · xarope de açúcar · manjericão fresco</div>
       </div>
       <div class="drink-card" data-drink="Bloody Mary">
-        <div class="drink-name">Bloody Mary</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-highball"></use></svg><span class="drink-name">Bloody Mary</span></div>
         <div class="drink-recipe">Vodka · suco de tomate · molho inglês · limão tahiti</div>
       </div>
       <div class="drink-card" data-drink="Garibaldi">
-        <div class="drink-name">Garibaldi</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-highball"></use></svg><span class="drink-name">Garibaldi</span></div>
         <div class="drink-recipe">Campari · suco de laranja batido</div>
       </div>
       <div class="drink-card" data-drink="In Cold Blood">
-        <div class="drink-name">In Cold Blood</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">In Cold Blood</span></div>
         <div class="drink-recipe">Rye · cynar · vermute</div>
       </div>
       <div class="drink-card" data-drink="NY Sour">
-        <div class="drink-name">NY Sour</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">NY Sour</span></div>
         <div class="drink-recipe">Bourbon · limão siciliano · xarope · clara de ovo · float de vinho tinto</div>
       </div>
       <div class="drink-card" data-drink="Margarita">
-        <div class="drink-name">Margarita</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Margarita</span></div>
         <div class="drink-recipe">Tequila · cointreau · limão tahiti</div>
       </div>
     </div>
@@ -760,15 +792,15 @@
 
     <div class="drink-list">
       <div class="drink-card" data-drink="Caipirinha">
-        <div class="drink-name">Caipirinha</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Caipirinha</span></div>
         <div class="drink-recipe">Cachaça branca · limão tahiti · xarope de açúcar</div>
       </div>
       <div class="drink-card" data-drink="Macunaíma">
-        <div class="drink-name">Macunaíma</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Macunaíma</span></div>
         <div class="drink-recipe">Cachaça branca · xarope de açúcar · suco de limão · Fernet-Branca</div>
       </div>
       <div class="drink-card" data-drink="Rabo de Galo">
-        <div class="drink-name">Rabo de Galo</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-rocks"></use></svg><span class="drink-name">Rabo de Galo</span></div>
         <div class="drink-recipe">Cachaça · cynar · vermute</div>
       </div>
     </div>
@@ -780,23 +812,23 @@
 
     <div class="drink-list">
       <div class="drink-card" data-drink="Bamboo">
-        <div class="drink-name">Bamboo</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-coupe"></use></svg><span class="drink-name">Bamboo</span></div>
         <div class="drink-recipe">Jerez · vermute branco · angostura laranja</div>
       </div>
       <div class="drink-card" data-drink="Adonis">
-        <div class="drink-name">Adonis</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-coupe"></use></svg><span class="drink-name">Adonis</span></div>
         <div class="drink-recipe">Jerez · vermute rosso · angostura laranja</div>
       </div>
       <div class="drink-card" data-drink="Casino Cocktail">
-        <div class="drink-name">Casino Cocktail</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-coupe"></use></svg><span class="drink-name">Casino Cocktail</span></div>
         <div class="drink-recipe">Gin · luxardo maraschino · limão siciliano · angostura laranja</div>
       </div>
       <div class="drink-card" data-drink="Martinez">
-        <div class="drink-name">Martinez</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-coupe"></use></svg><span class="drink-name">Martinez</span></div>
         <div class="drink-recipe">Gin · vermute rosso · luxardo maraschino · angostura tradicional</div>
       </div>
       <div class="drink-card" data-drink="Brooklyn (adaptado)">
-        <div class="drink-name">Brooklyn (adaptado)</div>
+        <div class="drink-head"><svg class="glass-icon"><use href="#glass-coupe"></use></svg><span class="drink-name">Brooklyn (adaptado)</span></div>
         <div class="drink-recipe">Rye · vermute branco · luxardo maraschino · cherry heering</div>
       </div>
     </div>
