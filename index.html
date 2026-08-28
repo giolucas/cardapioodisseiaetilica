@@ -194,7 +194,7 @@
   }
 
   /* Sections */
-  .section { padding: 34px 20px 0; }
+  .section { padding: 34px 20px 0; scroll-margin-top: calc(var(--header-h, 150px) + 12px); }
   .section:first-of-type { padding-top: 32px; }
   .section-kicker {
     display: flex;
@@ -660,6 +660,22 @@
       }
     });
   });
+})();
+</script>
+
+<script>
+(function () {
+  var header = document.querySelector(".site-header");
+  if (!header) return;
+  function setHeaderHeight() {
+    document.documentElement.style.setProperty("--header-h", header.offsetHeight + "px");
+  }
+  setHeaderHeight();
+  window.addEventListener("resize", setHeaderHeight);
+  window.addEventListener("load", setHeaderHeight);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(setHeaderHeight);
+  }
 })();
 </script>
 
