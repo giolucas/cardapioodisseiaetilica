@@ -508,98 +508,6 @@
   .back-to-top:hover { background: var(--brand-primary-hover); }
   .back-to-top svg { width: 20px; height: 20px; }
 
-  /* Gate (password lock) */
-  .gate {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--night);
-    padding: 24px;
-  }
-  .gate-card {
-    width: 100%;
-    max-width: 320px;
-    text-align: center;
-  }
-  .gate-mark {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto 20px;
-  }
-  .gate-eyebrow {
-    font-size: var(--text-3xs);
-    font-weight: var(--weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-label);
-    color: var(--accent-pink);
-    margin-bottom: 10px;
-  }
-  .gate-title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: var(--text-xl);
-    color: var(--text-on-night);
-    margin-bottom: 18px;
-  }
-  .gate-field { position: relative; }
-  .gate-input {
-    width: 100%;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    color: var(--text-on-night);
-    background: rgba(243, 236, 226, 0.08);
-    border: 1px solid rgba(243, 236, 226, 0.2);
-    border-radius: var(--radius-md);
-    padding: 12px 44px 12px 14px;
-    text-align: center;
-    outline: none;
-  }
-  .gate-input:focus { border-color: var(--brand-primary); }
-  .gate-toggle {
-    position: absolute;
-    top: 50%;
-    right: 6px;
-    transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
-    border: none;
-    background: transparent;
-    color: rgba(243, 236, 226, 0.55);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .gate-toggle:hover { color: var(--text-on-night); }
-  .gate-toggle svg { width: 19px; height: 19px; }
-  .gate-submit {
-    width: 100%;
-    margin-top: 10px;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-label);
-    color: #fff;
-    background: var(--brand-primary);
-    border: none;
-    border-radius: var(--radius-md);
-    padding: 12px 14px;
-    cursor: pointer;
-    transition: background 120ms ease;
-  }
-  .gate-submit:hover { background: var(--brand-primary-hover); }
-  .gate-error {
-    margin-top: 12px;
-    font-size: var(--text-2xs);
-    color: var(--accent-pink);
-    min-height: 1em;
-  }
-  .is-hidden { display: none !important; }
 </style>
 </head>
 <body>
@@ -620,21 +528,7 @@
   </defs>
 </svg>
 
-<div id="gate" class="gate">
-  <form id="gate-form" class="gate-card">
-    <img class="gate-mark" src="assets/garimpa-mark-round.png" alt="Garimpa Drink">
-    <div class="gate-eyebrow">Garimpa Drink</div>
-    <div class="gate-title">Cardápio reservado</div>
-    <div class="gate-field">
-      <input id="gate-input" class="gate-input" type="password" placeholder="Senha de acesso" autocomplete="off" autofocus>
-      <button type="button" id="gate-toggle" class="gate-toggle" aria-label="Mostrar senha"></button>
-    </div>
-    <button type="submit" class="gate-submit">Entrar</button>
-    <div id="gate-error" class="gate-error"></div>
-  </form>
-</div>
-
-<div id="page" class="page is-hidden">
+<div id="page" class="page">
 <div class="menu">
 
   <header class="site-header">
@@ -848,61 +742,6 @@
     </button>
   </div>
 </div>
-
-<script>
-(function () {
-  var PASSWORD_HASH = "c50b2b02a10bbc889dcb15814a96d66ff53d18da10b00f5396ee16bb9ca03898";
-  var SESSION_KEY = "garimpa_gate_ok";
-  var gate = document.getElementById("gate");
-  var page = document.getElementById("page");
-  var form = document.getElementById("gate-form");
-  var input = document.getElementById("gate-input");
-  var error = document.getElementById("gate-error");
-  var toggle = document.getElementById("gate-toggle");
-
-  var EYE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
-  var EYE_OFF_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a18.5 18.5 0 0 1 5.06-5.94"></path><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19"></path><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
-  toggle.innerHTML = EYE_ICON;
-  toggle.addEventListener("click", function () {
-    var showing = input.type === "text";
-    input.type = showing ? "password" : "text";
-    toggle.innerHTML = showing ? EYE_ICON : EYE_OFF_ICON;
-    toggle.setAttribute("aria-label", showing ? "Mostrar senha" : "Ocultar senha");
-  });
-
-  function unlock() {
-    gate.classList.add("is-hidden");
-    page.classList.remove("is-hidden");
-  }
-
-  function sha256Hex(text) {
-    var data = new TextEncoder().encode(text);
-    return crypto.subtle.digest("SHA-256", data).then(function (buf) {
-      return Array.prototype.map
-        .call(new Uint8Array(buf), function (b) { return b.toString(16).padStart(2, "0"); })
-        .join("");
-    });
-  }
-
-  if (sessionStorage.getItem(SESSION_KEY) === "1") {
-    unlock();
-  }
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    sha256Hex(input.value || "").then(function (hash) {
-      if (hash === PASSWORD_HASH) {
-        sessionStorage.setItem(SESSION_KEY, "1");
-        unlock();
-      } else {
-        error.textContent = "Senha incorreta.";
-        input.value = "";
-        input.focus();
-      }
-    });
-  });
-})();
-</script>
 
 <script>
 (function () {
